@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SkySchedule — 30-second promo</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8f8;--navy:#0e1f3d;--amber:#f2a23a;--sky:#cfe3f2;--ink:#0e1f3d;--card:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1426}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);font-family:Sora,system-ui,sans-serif;color:var(--ink)}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px}
+#stage{position:relative;width:min(100%,calc((100vh - 90px)*16/9));aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#1b3a6b 0%,#e9a96a 62%,#f9dfae 100%);container-type:inline-size;box-shadow:0 10px 40px rgba(14,31,61,.25)}
+.sc{position:absolute;inset:0;opacity:0;transition:opacity .6s;pointer-events:none}
+.sc.on{opacity:1}
+.big{position:absolute;left:6cqw;bottom:8cqw;font-size:7cqw;font-weight:800;line-height:1.02;color:#fff;letter-spacing:-.03em;text-shadow:0 .4cqw 2cqw rgba(14,31,61,.35)}
+.big em{font-style:normal;color:var(--amber)}
+.on .big{animation:rise .9s .3s both cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(3cqw)}to{opacity:1;transform:none}}
+/* sc1 sky */
+#s1 .sun{position:absolute;left:62cqw;top:30cqw;width:16cqw;height:16cqw;border-radius:50%;background:#fff3c8;box-shadow:0 0 8cqw 4cqw rgba(255,214,140,.7)}
+#s1 .plane{position:absolute;left:-12cqw;top:34cqw;width:11cqw;height:auto;fill:#fff}
+#s1.on .plane{animation:fly 4.2s ease-in forwards}
+@keyframes fly{to{transform:translate(120cqw,-30cqw) rotate(-8deg)}}
+#s1.on .sun{animation:sunr 4s ease-out both}
+@keyframes sunr{from{transform:translateY(8cqw)}to{transform:none}}
+/* light scenes */
+.lt{background:var(--bg)}
+.lt .big{color:var(--navy);text-shadow:none}
+.panel{position:absolute;right:6cqw;top:7cqw;width:48cqw;background:var(--card);border-radius:1.6cqw;padding:3cqw;box-shadow:0 2cqw 5cqw rgba(14,31,61,.15)}
+.field{font-size:3cqw;font-weight:600;border-bottom:.4cqw solid var(--navy);padding-bottom:1cqw;min-height:5cqw}
+.caret{display:inline-block;width:.3cqw;height:3cqw;background:var(--amber);vertical-align:middle;animation:bl .6s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.flight{margin-top:2.4cqw;background:var(--navy);color:#fff;border-radius:1.2cqw;padding:2.2cqw;opacity:0;transform:translateX(6cqw)}
+.on .flight{animation:slide .8s 2.4s both cubic-bezier(.2,.8,.2,1)}
+@keyframes slide{to{opacity:1;transform:none}}
+.flight b{font-size:4.4cqw;color:var(--amber)}.flight span{font-size:2.6cqw;display:block;margin-top:.6cqw}
+/* modules */
+.grid{position:absolute;right:6cqw;top:6cqw;width:52cqw;display:grid;grid-template-columns:repeat(3,1fr);gap:1.2cqw}
+.chip{background:var(--card);border-radius:1cqw;padding:1.8cqw 1.4cqw;font-size:2cqw;font-weight:600;box-shadow:0 .8cqw 2cqw rgba(14,31,61,.1);opacity:0;transform:rotateX(90deg);transform-origin:top}
+.chip i{display:block;font-style:normal;color:var(--amber);font-size:3cqw;margin-bottom:.6cqw}
+.on .chip{animation:flip .5s both}
+@keyframes flip{to{opacity:1;transform:none}}
+/* seats */
+.seats{display:grid;grid-template-columns:repeat(6,1fr);gap:1cqw;margin-top:1cqw}
+.seat{aspect-ratio:1;border-radius:.8cqw;background:#e3e8ee}
+.seat.me{background:var(--amber)}
+.on .seat.me{animation:pop .5s 1.6s both}
+@keyframes pop{from{transform:scale(1)}50%{transform:scale(1.35)}to{transform:scale(1)}}
+.ok{margin-top:2cqw;display:flex;align-items:center;gap:1.4cqw;font-size:3cqw;font-weight:800;opacity:0}
+.ok s{width:5cqw;height:5cqw;border-radius:50%;background:#2e9e6a;color:#fff;display:grid;place-items:center;text-decoration:none;font-size:3cqw}
+.on .ok{animation:slide .6s 3s both}
+/* route */
+#s5 svg{position:absolute;right:4cqw;top:4cqw;width:56cqw}
+#s5 path.arc{stroke:var(--amber);stroke-width:1.2;fill:none;stroke-dasharray:200;stroke-dashoffset:200}
+#s5.on path.arc{animation:draw 2.6s .6s forwards ease-in-out}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pt{fill:var(--navy)}
+.stats{position:absolute;right:6cqw;bottom:7cqw;display:flex;gap:3cqw;font-size:2.2cqw}
+.stats b{display:block;font-size:5cqw;color:var(--navy)}
+/* end */
+#s6{background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff}
+#s6 h1{font-size:11cqw;margin:0;letter-spacing:-.04em;font-weight:800;opacity:0}
+#s6 h1:after{content:"";display:block;height:.9cqw;background:var(--amber);width:0;margin:1.2cqw auto 0;transition:width 1s .8s}
+#s6.on h1{animation:slide 1s .2s both}
+#s6.on h1:after{width:100%}
+#s6 p{font-size:3.2cqw;margin:3cqw 6cqw 0;opacity:0;max-width:80cqw}
+#s6.on p{animation:slide 1s 1.2s both}
+#s6 small{position:absolute;bottom:3cqw;font-size:1.6cqw;opacity:.7}
+.tag{position:absolute;top:2.5cqw;left:3cqw;font-size:1.5cqw;color:#fff;opacity:.8;font-weight:600}
+.lt .tag{color:var(--navy)}
+#bar{position:absolute;left:0;bottom:0;height:.6cqw;background:var(--amber);width:0}
+#cover{position:absolute;inset:0;display:grid;place-items:center;background:rgba(14,31,61,.55);z-index:5;cursor:pointer;color:#fff;font-weight:800;font-size:4cqw}
+#cover span{background:var(--amber);color:var(--navy);padding:1.6cqw 4cqw;border-radius:5cqw}
+.ctl{display:flex;gap:10px}
+button{font:600 14px Sora,system-ui,sans-serif;padding:9px 18px;border-radius:20px;border:2px solid var(--navy);background:transparent;color:var(--navy);cursor:pointer}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button{color:#fff;border-color:#fff}}
+@media (prefers-reduced-motion:reduce){.sc{transition:none}}
+</style></head><body>
+<div id="stage">
+ <div id="cover"><span>▶ Play 30s promo</span></div>
+ <div class="tag" id="tag">Clip A</div>
+ <section class="sc" id="s1"><div class="sun"></div>
+  <svg class="plane" viewBox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-8 8 14 1 8-4h4l-4 6 4 6h-4l-8-4-14 1 8 8h-6l-14-8L2 12z"/></svg>
+  <div class="big">The day runs<br>better <em>in sequence.</em></div></section>
+ <section class="sc lt" id="s2"><div class="panel"><div class="field"><span id="typed"></span><i class="caret"></i></div>
+  <div class="flight"><b>AI1010</b><span>Delhi → Mumbai</span></div></div>
+  <div class="big">Search.<br><em>Find.</em></div></section>
+ <section class="sc lt" id="s3"><div class="grid" id="grid"></div><div class="big">Nine modules.<br><em>One flow.</em></div></section>
+ <section class="sc lt" id="s4"><div class="panel"><div class="field" style="border:0;font-size:2.4cqw">Seat map · AI1010</div>
+  <div class="seats" id="seats"></div><div class="ok"><s>✓</s>Seat 1A · CONFIRMED</div></div>
+  <div class="big">Book in<br><em>seconds.</em></div></section>
+ <section class="sc lt" id="s5"><svg viewBox="0 0 100 70"><circle class="pt" cx="30" cy="12" r="2"/><circle class="pt" cx="22" cy="52" r="2"/><path class="arc" d="M30 12 C 70 20, 70 45, 22 52"/></svg>
+  <div class="stats"><div><b>Delhi</b>Source</div><div><b>Mumbai</b>Destination</div></div>
+  <div class="big">Every record,<br><em>connected.</em></div></section>
+ <section class="sc" id="s6"><h1>SkySchedule</h1><p>Flights, people, gates and bookings — in one clear flow.</p><small>Java academic project · KL University · Demo only</small></section>
+ <div id="bar"></div>
+</div>
+<div class="ctl"><button id="replay">Replay</button><button id="mute">Sound: on</button></div>
+<script>
+const $=s=>document.querySelector(s);
+const mods=[["✈","Flights"],["◎","Airlines"],["◉","Passengers"],["⌖","Gates"],["▤","Booking"],["✓","Validation"],["⌕","Search"],["▥","Reports"],["◌","Analysis"]];
+$("#grid").innerHTML=mods.map((m,i)=>`<div class="chip" style="animation-delay:${.4+i*.45}s"><i>${m[0]}</i>${m[1]}</div>`).join("");
+$("#seats").innerHTML=Array.from({length:18},(_,i)=>`<div class="seat${i==0?' me':''}"></div>`).join("");
+// scenes: [id, start, end]
+const S=[["s1",0,4],["s2",4,9],["s3",9,15],["s4",15,21],["s5",21,26],["s6",26,30]];
+let t0=null,raf=0,ac=null,master=null,muted=false,timers=[];
+function show(id){S.forEach(([k])=>{const e=$("#"+k);const was=e.classList.contains("on");e.classList.toggle("on",k==id);if(k==id&&!was){e.style.display="none";e.offsetHeight;e.style.display="";e.classList.remove("on");e.offsetHeight;e.classList.add("on")}})}
+function type(){const w="Delhi → Mumbai";const el=$("#typed");el.textContent="";[...w].forEach((c,i)=>timers.push(setTimeout(()=>el.textContent+=c,300+i*110)))}
+function tick(now){const t=(now-t0)/1000;
+ const cur=S.find(([k,a,b])=>t>=a&&t<b);
+ if(cur&&!$("#"+cur[0]).classList.contains("on")){show(cur[0]);if(cur[0]=="s2")type();$("#tag").textContent=t<15?"Clip A":"Clip B";$("#tag").style.color=["s1","s6"].includes(cur[0])?"#fff":"#0e1f3d"}
+ $("#bar").style.width=Math.min(100,t/30*100)+"%";
+ if(t<30)raf=requestAnimationFrame(tick);else{$("#cover span").textContent="↺ Replay";$("#cover").style.display="grid"}}
+// original score: warm arpeggio + soft pulse, ~100 BPM, builds in A, resolves in B
+function music(){ac=ac||new (window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=muted?0:.5;master.connect(ac.destination);
+ const T=ac.currentTime+.05,beat=.6;
+ const chords=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]]; // Am F C G
+ const f=n=>440*Math.pow(2,(n-69)/12);
+ for(let b=0;b<50;b++){const ch=chords[Math.floor(b/4)%4],t=T+b*beat*1;
+  const n=ch[b%3]+(b%6>2?12:0),lvl=b<25?.05+b*.002:.1-(b>44?(b-44)*.012:0);
+  note(f(n+12),t,.9,lvl,"triangle");
+  if(b%4==0)note(f(ch[0]-12),t,2.2,.08,"sine");
+  if(b%2==0&&b>6)kick(t,Math.min(.18,.04+b*.004));}
+ }
+function note(fr,t,d,v,type){const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=fr;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(master);o.start(t);o.stop(t+d+.05)}
+function kick(t,v){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(40,t+.15);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+.2);o.connect(g).connect(master);o.start(t);o.stop(t+.25)}
+function play(){timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);
+ if(ac){try{master.disconnect();ac.close()}catch(e){}ac=null}
+ S.forEach(([k])=>$("#"+k).classList.remove("on"));
+ $("#cover").style.display="none";
+ try{music()}catch(e){}
+ t0=performance.now();raf=requestAnimationFrame(tick)}
+$("#cover").onclick=play;$("#replay").onclick=play;
+$("#mute").onclick=e=>{muted=!muted;if(master)master.gain.value=muted?0:.5;e.target.textContent="Sound: "+(muted?"off":"on")};
+</script></body></html>
